@@ -10,26 +10,6 @@ body {
     background-position: center;
 }
 
-.stApp > header + div[data-testid="stVerticalBlock"] > div {
-    background-color: rgba(0, 0, 0, 0.6);
-    padding: 2rem;
-    border-radius: 10px;
-    backdrop-filter: blur(10px);
-}
-
-.user-bubble, .assistant-bubble {
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.user-bubble {
-    background-color: rgba(25, 118, 210, 0.8);
-}
-
-.assistant-bubble {
-    background-color: rgba(56, 142, 60, 0.8);
-}
-
 .stButton>button {
     color: #FFFFFF;
     background-color: #4A4A4A;
@@ -108,109 +88,22 @@ body {
     padding-left: 20px;
 }
 
-/* Sidebar Styles */
-.sidebar-tips {
-    background-color: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    border-radius: 10px;
+.sidebar .sidebar-content {
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #E0E0E0;
     padding: 20px;
-    margin-top: 20px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
 }
 
-.sidebar-tips h4 {
+.sidebar .sidebar-content h4 {
     color: #FFD700;
     margin-bottom: 20px;
-    font-size: 1.2rem;
-    border-bottom: 2px solid #FFD700;
-    padding-bottom: 10px;
 }
 
-.sidebar-tips h4 i {
-    margin-right: 10px;
+.sidebar .sidebar-content ul {
+    padding-left: 20px;
 }
 
-.sidebar-tips ul.fa-ul {
-    margin-left: 1.5em;
-}
-
-.sidebar-tips li {
-    margin-bottom: 15px;
-    color: #E0E0E0;
-    font-size: 0.95rem;
-    line-height: 1.4;
-}
-
-.sidebar-tips .fa-li {
-    left: -1.5em;
-    position: absolute;
-    text-align: center;
-    width: 1.5em;
-    line-height: inherit;
-    color: #FFD700;
-}
-
-/* Add some hover effects */
-.sidebar-tips li:hover {
-    transform: translateX(5px);
-    transition: transform 0.3s ease;
-}
-
-.sidebar-tips li:hover .fa-li i {
-    transform: scale(1.2);
-    transition: transform 0.3s ease;
-}
-
-/* Custom scrollbar for Webkit browsers */
-.sidebar-tips::-webkit-scrollbar {
-    width: 6px;
-}
-
-.sidebar-tips::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.1);
-}
-
-.sidebar-tips::-webkit-scrollbar-thumb {
-    background-color: rgba(255, 215, 0, 0.5);
-    border-radius: 3px;
-}
-
-/* Ensure the sidebar has a max height and scrolls if needed */
-section[data-testid="stSidebar"] .stApp {
-    height: 100vh;
-    overflow-y: auto;
-}
-
-@keyframes slideInFromLeft {
-    0% {
-        transform: translateX(-10%);
-        opacity: 0;
-    }
-    100% {
-        transform: translateX(0);
-        opacity: 1;
-    }
-}
-
-.sidebar-tips {
-    animation: 0.5s ease-out 0s 1 slideInFromLeft;
-}
-
-.sidebar-tips details > summary {
-    cursor: pointer;
-    list-style: none;
-}
-
-.sidebar-tips details > summary::-webkit-details-marker {
-    display: none;
-}
-
-.sidebar-tips details > summary h4 {
-    display: inline-block;
-    border-bottom: none;
-}
-
-.sidebar-tips details[open] > summary h4 {
-    border-bottom: 2px solid #FFD700;
-    padding-bottom: 10px;
+.sidebar .sidebar-content li {
+    margin-bottom: 10px;
 }

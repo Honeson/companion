@@ -29,7 +29,7 @@ def display_tips():
 
 def main():
     # Load CSS
-    local_css("styles.css")
+    local_css("style.css")
 
     # Sidebar
     st.sidebar.markdown(animated_text("🙏 SoulVerse 🕊️", "fade-in-text"), unsafe_allow_html=True)
@@ -40,18 +40,9 @@ def main():
         st.session_state.messages = []
     if 'new_conversation' not in st.session_state:
         st.session_state.new_conversation = True
-    if 'user_input' not in st.session_state:
-        st.session_state.user_input = ""
 
-    # Custom CSS for labels
-    st.markdown("""
-    <style>
-    .label {
-        color: black;
-    }
-    </style>
-    """, unsafe_allow_html=True)
-
+    
+    
     # App description
     st.markdown("""
 <div class="app-description">
@@ -66,7 +57,7 @@ def main():
 """, unsafe_allow_html=True)
 
     # Religion selection
-    religion = st.selectbox("Select your faith:", ["Christian", "Muslim"], key='religion')
+    religion = st.selectbox("Select your faith:", ["Christian", "Muslim"])
 
     # Display previous messages
     for message in st.session_state.messages:
@@ -76,20 +67,22 @@ def main():
             st.markdown(f'<div class="assistant-bubble">{message["content"]}</div>', unsafe_allow_html=True)
 
     # User input
-    user_input = st.text_area("Share your current situation or concern:", key='user_input')
+    user_input = st.text_area("Share your current situation or concern:", value=st.session_state.get('user_input', ''))
 
     if st.button("Seek Guidance", key='seek_guidance'):
         if user_input:
-            # Add user message to chat history
-            st.session_state.messages.append({"role": "user", "content": user_input})
-            
-            # Prepare input for get_answer
+            # Concatenate previous messages if it's not a new conversation
             if not st.session_state.new_conversation:
                 context = "\n".join([f"{m['role']}: {m['content']}" for m in st.session_state.messages])
                 full_input = f"{context}\nUser: {user_input}"
+                st.session_state.user_input = ""
+                st.experimental_rerun()
             else:
                 full_input = user_input
                 st.session_state.new_conversation = False
+
+            # Add user message to chat history
+            st.session_state.messages.append({"role": "user", "content": user_input})
 
             # Get response
             response = get_answer(full_input, religion)
@@ -97,10 +90,8 @@ def main():
             # Add assistant's response to chat history
             st.session_state.messages.append({"role": "assistant", "content": response})
 
-            # Clear user input using st.session_state
-            
+            # Clear the input box and rerun
             st.experimental_rerun()
-            st.session_state.user_input = ""
         else:
             st.warning("Please share your situation before seeking guidance.")
 
@@ -108,12 +99,15 @@ def main():
     if st.button("Start New Conversation"):
         st.session_state.messages = []
         st.session_state.new_conversation = True
-        st.session_state.user_input = ""
         st.experimental_rerun()
 
+    
     st.markdown("---")
     st.write("🌐 Connected to: SoulVerse")
     st.caption("Made with ❤️ by Sunny")
+
+
+
 
 if __name__ == "__main__":
     main()
