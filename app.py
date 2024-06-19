@@ -1,10 +1,11 @@
 import streamlit as st
 from main import get_answer
-
 # Custom CSS
 def local_css(file_name):
     with open(file_name, 'r') as f:
         st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
+
+
 
 def animated_text(text, animation_class):
     return f'<div class="{animation_class}">{text}</div>'
@@ -31,6 +32,8 @@ def main():
     # Load CSS
     local_css("styles.css")
 
+    
+
     # Sidebar
     st.sidebar.markdown(animated_text("🙏 SoulVerse 🕊️", "fade-in-text"), unsafe_allow_html=True)
     display_tips()
@@ -55,18 +58,13 @@ def main():
     # App description
     st.markdown("""
 <div class="app-description">
-    I am SoulVerse, your AI-powered spiritual companion. 
-    My purpose is to walk alongside you on your difficult or happy moments, 
-    offering personalized verses and insights from your chosen holy book. 
-    I'm here to listen and support you, whether you're facing challenges and need comfort, 
-    seeking guidance for important decisions, or simply want to share your joys and triumphs. 
-    Just express your thoughts to me, and I'll provide compassionate support with relevant scriptures, 
-    helping you find deeper meaning and relief in your life. 
+    I am SoulVerse, your companion in faith. 
+    I'm here to walk with you through all life's moments, offering personalized Bible verses and insights. Whether you need comfort during challenges, guidance for decisions, or a companion to share your joys, just share your thoughts with me. I'll provide compassionate support with relevant scriptures, helping you find deeper meaning and relief in your journey. 
 </div>
 """, unsafe_allow_html=True)
 
     # Religion selection
-    religion = st.selectbox("Select your faith:", ["Christian", "Muslim"], key='religion')
+    #religion = st.selectbox("Select your faith:", ["Christian"], key='religion')
 
     # Display previous messages
     for message in st.session_state.messages:
@@ -77,6 +75,7 @@ def main():
 
     # User input
     user_input = st.text_area("Share your current situation or concern:", key='user_input')
+    
 
     if st.button("Seek Guidance", key='seek_guidance'):
         if user_input:
@@ -92,7 +91,7 @@ def main():
                 st.session_state.new_conversation = False
 
             # Get response
-            response = get_answer(full_input, religion)
+            response = get_answer(full_input)
 
             # Add assistant's response to chat history
             st.session_state.messages.append({"role": "assistant", "content": response})
@@ -108,7 +107,7 @@ def main():
     if st.button("Start New Conversation"):
         st.session_state.messages = []
         st.session_state.new_conversation = True
-        st.session_state.user_input = ""
+        #st.session_state.user_input = ""
         st.experimental_rerun()
 
     st.markdown("---")

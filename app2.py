@@ -46,13 +46,8 @@ def main():
     # App description
     st.markdown("""
 <div class="app-description">
-    I am SoulVerse, your AI-powered spiritual companion. 
-    My purpose is to walk alongside you on your difficult or happy moments, 
-    offering personalized verses and insights from your chosen holy book. 
-    I'm here to listen and support you, whether you're facing challenges and need comfort, 
-    seeking guidance for important decisions, or simply want to share your joys and triumphs. 
-    Just express your thoughts to me, and I'll provide compassionate support with relevant scriptures, 
-    helping you find deeper meaning and relief in your life. 
+    I am SoulVerse, your companion in faith. 
+    I'm here to walk with you through all life's moments, offering personalized Bible verses and insights. Whether you need comfort during challenges, guidance for decisions, or a companion to share your joys, just share your thoughts with me. I'll provide compassionate support with relevant scriptures, helping you find deeper meaning and relief in your journey. 
 </div>
 """, unsafe_allow_html=True)
 
